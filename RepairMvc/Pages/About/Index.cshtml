@@ -1,0 +1,68 @@
+﻿@page
+@model RepairMvc.Pages.About.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<p class="title">About</p>
+
+<article class="message is-primary">
+    <div class="message-header">
+        <p>Sql-server and Entity Framework</p>
+        <button class="delete" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+        <p><strong>Code first database, using Entity Framework to generate the database tables.</strong></p>
+        <p><strong>Sql Querries to fill the database with default products.</strong></p>
+        <p><strong>Scaffolded Identity into the project, Appuser inherits from the IdentityUser class.</strong></p>
+    </div>
+    <div class="tags has-addons">
+        <span class="tag is-success">EF-Core</span>
+        <span class="tag is-dark">ApplicationDbContext</span>
+        <span class="tag is-success">SQL</span>
+        <span class="tag is-dark">DbConnectionString</span>
+    </div>
+</article>
+
+<article class="message is-primary">
+    <div class="message-header">
+        <p>Mvc and Razorpages</p>
+        <button class="delete" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+        <strong>MVC:</strong>
+        <p><strong>Models -> RepairMvcDomain.Models</strong></p>
+        <p><strong>Views -> RepairMvc.Pages</strong></p>
+        <p><strong>ontrollers -> RepairMvc.Controllers</strong></p>
+    </div>
+</article>
+
+<article class="message is-primary">
+    <div class="message-header">
+        <p>Vue.js, Axios http client and Bulma.css frontend</p>
+        <button class="delete" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+        <p><strong>Vue.js</strong></p>
+        <p>
+            open-source model–view–viewmodel front end.
+            JavaScript framework for building user interfaces
+            and single-page applications.
+        </p>
+        <p><strong>Axios</strong></p>
+        <p>
+            A promise based http client.
+        </p>
+        <p><strong>AJAX</strong></p>
+        <p>
+            Asynchronos Javascript and Xml.
+        </p>
+        <p><strong>Bulma.css</strong></p>
+        <p>
+            Library for Css Styling.
+        </p>
+
+    </div>
+</article>

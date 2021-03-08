@@ -1,0 +1,215 @@
+﻿@page
+@model Razor_Identity.Pages.RepairOrders.EditModel
+
+@{ ViewData["Title"] = "Edit";
+                Layout = "~/Pages/Shared/_Layout.cshtml"; }
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Edit</h1>
+
+    <h4>RepairOrder</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Order.OrderId" />
+                <div class="form-group">
+                    <label asp-for="Order.Status" class="control-label"></label>
+                    <select asp-for="Order.Status" class="form-control" asp-items="ViewBag.Statussen"></select>
+                    <span asp-validation-for="Order.Status" class="text-danger"></span>
+                </div>
+                <!--
+    <div class="form-group">
+        <label asp-for="RepairOrder.Customer" class="control-label"></label>
+        <select asp-for="RepairOrder.CustomerID" class="form-control" asp-items="ViewBag.CustomerID"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="RepairOrder.Employee" class="control-label"></label>
+        <select asp-for="RepairOrder.EmployeeID" class="form-control" asp-items="ViewBag.EmployeeID"></select>
+    </div>
+    -->
+                <div class="form-group">
+                    <label asp-for="Order.HoursWorked" class="control-label"></label>
+                    <input asp-for="Order.HoursWorked" class="form-control" min="0" />
+                    <span asp-validation-for="Order.HoursWorked" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Order.BeginDate" class="control-label"></label>
+                    <input min="@DateTime.Today.ToString("yyyy-MM-dd")" asp-for="Order.BeginDate" class="form-control" />
+                    <span asp-validation-for="Order.BeginDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Order.EndDate" class="control-label"></label>
+                    <input min="@DateTime.Today.ToString("yyyy-MM-dd")" asp-for="Order.EndDate" class="form-control" />
+                    <span asp-validation-for="Order.EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Order.Description" class="control-label"></label>
+                    <textarea asp-for="Order.Description" class="form-control"></textarea>
+                    <span asp-validation-for="Order.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Order.WorkReport" class="control-label"></label>
+                    <textarea asp-for="Order.WorkReport" class="form-control"></textarea>
+                    <span asp-validation-for="Order.WorkReport" class="text-danger"></span>
+                </div>
+
+                <div class="input-group" id="part1Div">
+                    <span class="input-group-addon">Part 1 &nbsp;</span>
+                    <select asp-for="Order.PartID1" class="form-control" asp-items="ViewBag.PartID" style="width: 100px;" id="part1">
+                        <option disabled selected value="0">Select Part</option>
+                    </select>
+                    <span class="input-group-addon" style="border-left: 0; border-right: 0;">&nbsp; Quantity &nbsp;</span>
+                    <input asp-for="Order.Part1Quantity" class="form-control" value="@Model.Order.Part1Quantity" id="part1Q"></>
+                </div>
+                <div class="input-group" id="part2Div">
+                    <span class="input-group-addon">Part 2 &nbsp;</span>
+                    <select asp-for="Order.PartID2" class="form-control" asp-items="ViewBag.PartID" style="width: 100px;" id="part2">
+                        <option disabled selected value="0">Select Part</option>
+                    </select>
+                    <span class="input-group-addon" style="border-left: 0; border-right: 0;">&nbsp; Quantity &nbsp;</span>
+                    <input asp-for="Order.Part2Quantity" class="form-control" value="@Model.Order.Part2Quantity" id="part2Q"></>
+                </div>
+                <div class="input-group" id="part3Div">
+                    <span class="input-group-addon">Part 3 &nbsp;</span>
+                    <select asp-for="Order.PartID3" class="form-control" asp-items="ViewBag.PartID" style="width: 100px;" id="part3">
+                        <option disabled selected value="">Select Part</option>
+                    </select>
+                    <span class="input-group-addon" style="border-left: 0; border-right: 0;">&nbsp; Quantity &nbsp;</span>
+                    <input asp-for="Order.Part3Quantity" class="form-control" value="@Model.Order.Part3Quantity" id="part3Q"></>
+                </div>
+                <div class="input-group" id="part4Div">
+                    <span class="input-group-addon">Part 4 &nbsp;</span>
+                    <select asp-for="Order.PartID4" class="form-control" asp-items="ViewBag.PartID" style="width: 100px;" id="part4">
+                        <option disabled selected value="">Select Part</option>
+                    </select>
+                    <span class="input-group-addon" style="border-left: 0; border-right: 0;">&nbsp; Quantity &nbsp;</span>
+                    <input asp-for="Order.Part4Quantity" class="form-control" value="@Model.Order.Part4Quantity" id="part4Q"></>
+                </div>
+                <div class="input-group" id="part5Div">
+                    <span class="input-group-addon">Part 5 &nbsp;</span>
+                    <select asp-for="Order.PartID5" class="form-control" asp-items="ViewBag.PartID" style="width: 100px;" id="part5">
+                        <option disabled selected value="">Select Part</option>
+                    </select>
+                    <span class="input-group-addon" style="border-left: 0; border-right: 0;">&nbsp; Quantity &nbsp;</span>
+                    <input asp-for="Order.Part5Quantity" class="form-control" value="@Model.Order.Part5Quantity" id="part5Q"></>
+                </div>
+                <div class="input-group" id="part6Div">
+                    <span class="input-group-addon">Part 6 &nbsp;</span>
+                    <select asp-for="Order.PartID6" class="form-control" asp-items="ViewBag.PartID" style="width: 100px;" id="part6">
+                        <option disabled selected value="">Select Part</option>
+                    </select>
+                    <span class="input-group-addon" style="border-left: 0; border-right: 0;">&nbsp; Quantity &nbsp;</span>
+                    <input asp-for="Order.Part6Quantity" class="form-control" value="@Model.Order.Part6Quantity" id="part6Q"></>
+                </div>
+                <div class="input-group" id="part7Div">
+                    <span class="input-group-addon">Part 7 &nbsp;</span>
+                    <select asp-for="Order.PartID7" class="form-control" asp-items="ViewBag.PartID" style="width: 100px;" id="part7">
+                        <option disabled selected value="">Select Part</option>
+                    </select>
+                    <span class="input-group-addon" style="border-left: 0; border-right: 0;">&nbsp; Quantity &nbsp;</span>
+                    <input asp-for="Order.Part7Quantity" class="form-control" value="@Model.Order.Part7Quantity" id="part7Q"></>
+                </div>
+                <div class="input-group" id="part8Div">
+                    <span class="input-group-addon">Part 8 &nbsp;</span>
+                    <select asp-for="Order.PartID8" class="form-control" asp-items="ViewBag.PartID" style="width: 100px;" id="part8">
+                        <option disabled selected value="">Select Part</option>
+                    </select>
+                    <span class="input-group-addon" style="border-left: 0; border-right: 0;">&nbsp; Quantity &nbsp;</span>
+                    <input asp-for="Order.Part8Quantity" class="form-control" value="@Model.Order.Part8Quantity" id="part8Q"></>
+                </div>
+
+                <!--jQuery functie die alles verstopt en laat zien als het value heeft-->
+                <script>
+                    $(document).ready(function () {
+                        $('#part2Div,#part3Div,#part4Div,#part5Div,#part6Div,#part7Div,#part8Div').hide();
+
+                        if ($('#part1').val()) {
+                            $('#part1Div').show();
+                            $('#part2Div').show();
+                        }
+                        if ($('#part2').val()) {
+                            $('#part2Div').show();
+                            $('#part3Div').show();
+                        }
+                        if ($('#part3').val()) {
+                            $('#part3Div').show();
+                            $('#part4Div').show();
+                        }
+                        if ($('#part4').val()) {
+                            $('#part4Div').show();
+                            $('#part5Div').show();
+                        }
+                        if ($('#part5').val()) {
+                            $('#part5Div').show();
+                            $('#part6Div').show();
+                        }
+                        if ($('#part6').val()) {
+                            $('#part6Div').show();
+                            $('#part7Div').show();
+                        }
+                        if ($('#part7').val()) {
+                            $('#part7Div').show();
+                            $('#part8Div').show();
+                        }
+                        if ($('#part8').val()) {
+                            $('#part8Div').show();
+                        }
+
+                        $('#part1').on('change', function () {
+                            $("#part2Div").show();
+                            $("#part1Q").attr({ "min": 0 }).val(1);
+                        });
+                        $('#part2').on('change', function () {
+                            $("#part3Div").show();
+                            $("#part2Q").attr({ "min": 0 }).val(1);
+                        });
+                        $('#part3').on('change', function () {
+                            $("#part4Div").show();
+                            $("#part3Q").attr({ "min": 0 }).val(1);
+                        });
+                        $('#part4').on('change', function () {
+                            $("#part5Div").show();
+                            $("#part4Q").attr({ "min": 0 }).val(1);
+                        });
+                        $('#part5').on('change', function () {
+                            $("#part6Div").show();
+                            $("#part5Q").attr({ "min": 0 }).val(1);
+                        });
+                        $('#part6').on('change', function () {
+                            $("#part7Div").show();
+                            $("#part6Q").attr({ "min": 0 }).val(1);
+                        });
+                        $('#part7').on('change', function () {
+                            $("#part8Div").show();
+                            $("#part7Q").attr({ "min": 0 }).val(1);
+                        });
+                        $('#part8').on('change', function () {
+                            $("#part8Q").attr({ "min": 0 }).val(1);
+                        });
+
+                    });
+                </script>
+
+                <br><br />
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RepairMvc</title>
+    <!--link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /-->
+    <link href="~/lib/bulma/css/bulma.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <h3 class="title has-text-centered">Admin Panel</h3>
+    </header>
+
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3">
+                <div class="menu">
+                    <p class="menu-label">Admin menu</p>
+                    <ul class="menu-list">
+                        <li><a asp-page="/Admin/Index">Products</a></li>
+                        <li><a asp-page="/Admin/Orders">Orders</a></li>
+                        <li><a asp-page="/Admin/RepairOrders">RepairOrders</a></li>
+                        <li><a asp-page="/Admin/Stock">Stock</a></li>
+                    </ul>
+                    <p class="menu-label"></p>
+                    <ul class="menu-list">
+                        <li><a asp-page="/Index">Back to Main</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column is-9">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
+
+<!--
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+ -->

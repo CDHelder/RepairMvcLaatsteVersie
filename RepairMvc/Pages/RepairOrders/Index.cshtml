@@ -1,0 +1,97 @@
+﻿@page
+@model Razor_Identity.Pages.RepairOrders.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index of Repair orders</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <td>
+                    On_hold: @Html.ViewData.Model.Order.Count(model => model.Status == Domain.Models.Status.On_Hold)
+                </td>
+                <td>
+                    Under_repair: @Html.ViewData.Model.Order.Count(model => model.Status == Domain.Models.Status.Under_Repair)
+                </td>
+                <td>
+                    Waiting_for_parts: @Html.ViewData.Model.Order.Count(model => model.Status == Domain.Models.Status.Waiting_for_parts)
+                </td>
+                <td>
+                    Done: @Html.ViewData.Model.Order.Count(model => model.Status == Domain.Models.Status.Done)
+                </td>
+            </tr>
+        </thead>
+    </table>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Status)
+            </th>
+                        <!--
+                Verwerk hier customer en employee verder
+            <th>
+                Html.DisplayNameFor(model => model.RepairOrder[0].Customer)
+            </th>
+            <th>
+                Html.DisplayNameFor(model => model.RepairOrder[0].Employee)
+            </th>
+            -->
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].HoursWorked)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].BeginDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].EndDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Order) {
+
+    string tr_color = "white";
+
+    if (item.Status.ToString() == "Done") { tr_color = "lightgreen"; }
+    else if (item.BeginDate <= DateTime.Today) { tr_color = "lightcoral"; }
+
+        <tr style='background-color:@tr_color;'>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+                            <!--
+                    Verwerk hier verder de customer en employee info
+                <td>
+                    Html.DisplayFor(modelItem => item.Customer.Name)
+                </td>
+                <td>
+                    Html.DisplayFor(modelItem => item.Employee.Name)
+                </td>
+                -->
+            <td>
+                @Html.DisplayFor(modelItem => item.HoursWorked)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeginDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.OrderId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.OrderId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.OrderId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

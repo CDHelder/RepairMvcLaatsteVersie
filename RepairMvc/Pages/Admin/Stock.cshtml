@@ -1,0 +1,53 @@
+﻿@page
+@model RepairMvc.Pages.Admin.StockModel
+@{
+}
+
+<div id="app">
+    <div class="columns">
+        <div class="column is-3">
+            <table class="table">
+                <tr v-for="(product) in products" v-on:click="selectProduct(product)">
+                    <td>{{product.name}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="column is-6" v-if="selectedProduct">
+            <table class="table">
+                <tr v-for="(stock, index) in selectedProduct.stock">
+                    <td><input v-model="stock.description" /></td>
+                    <td><input v-model="stock.quantity" /></td>
+
+                    <td><a class="button is-danger" v-on:click="deleteStock(stock.id, index)">Delete Stock</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="column is-3" v-if="selectedProduct">
+        <h2 class="title">new Stock</h2>
+        <div class="field">
+            <div class="control">
+                <input v-model="newStock.description" />
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input v-model="newStock.quantity" />
+            </div>
+        </div>
+
+        <a class="button is-success" v-on:click="updateStock">Update Stock</a>
+        <a class="button is-success" v-on:click="addStock">Add</a>
+    </div>
+</div>
+
+
+<!--
+-->
+
+@section scripts {
+    <script src="~/js/admin/stock.js"></script>
+}

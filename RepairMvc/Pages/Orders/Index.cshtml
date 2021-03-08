@@ -1,0 +1,115 @@
+﻿@page
+@model RepairMvc.Pages.Orders.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<nav class="level">
+    <div class="level-item has-text-centered">
+        <div>
+            <p class="heading">On_Hold</p>
+            <p class="title">@Html.ViewData.Model.Order.Count(m => m.Status == Domain.Models.Status.On_Hold)</p>
+        </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+            <p class="heading">Under_Repair</p>
+            <p class="title">@Html.ViewData.Model.Order.Count(m => m.Status == Domain.Models.Status.Under_Repair)</p>
+        </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+            <p class="heading">Waiting_for_parts</p>
+            <p class="title">@Html.ViewData.Model.Order.Count(m => m.Status == Domain.Models.Status.Waiting_for_parts)</p>
+        </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+            <p class="heading">Done</p>
+            <p class="title">@Html.ViewData.Model.Order.Count(m => m.Status == Domain.Models.Status.Done)</p>
+        </div>
+    </div>
+</nav>
+
+<div class="column">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order[0].OrderRef)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order[0].Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order[0].City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order[0].Postcode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order[0].Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order[0].HoursWorked)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order[0].BeginDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order[0].EndDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Order)
+            {
+                string tr_color = (item.Status == Domain.Models.Status.Done) ? "lightgreen" : "lightcoral";
+                string td_color = (item.EndDate <= DateTime.Today) ? "darkred" : "darkgreen";
+
+                <tr style='background-color:@tr_color;'>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderRef)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Postcode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoursWorked)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BeginDate)
+                    </td>
+                    <td style='color: @td_color;'>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.OrderId">Edit</a>
+                        <a asp-page="./Details" asp-route-id="@item.OrderId">Details</a>
+                        <a asp-page="./Delete" asp-route-id="@item.OrderId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="columns is-centered">
+    <a class="button is-success" asp-area="" asp-page="Create">Create New</a>
+</div>
+
+@section scripts {
+    <script src="~/lib/jquery/"></script>
+}

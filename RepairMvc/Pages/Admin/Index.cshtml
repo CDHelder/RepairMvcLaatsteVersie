@@ -1,0 +1,67 @@
+﻿@page
+@model RepairMvc.Pages.Admin.IndexModel
+@{
+}
+
+<div id="app" class="container">
+    <div>
+        <div v-if="!editing">
+            <table class="table">
+                <tr>
+                    <th>productId</th>
+                    <th>name</th>
+                    <th>partType</th>
+                    <th>price</th>
+                    <th></th>
+                </tr>
+                <tr v-for="(product, index) in products">
+                    <td>{{product.productId}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.partType}}</td>
+                    <td>{{product.price}}</td>
+                    <td><button v-on:click="editProduct(product, index)">Edit</button></td>
+                    <td><button v-on:click="deleteProduct(product.productId)">Remove</button></td>
+                </tr>
+            </table>
+            <button class="button is-success" v-on:click="newProduct">Add New Product</button>
+        </div>
+
+        <div v-else>
+            <div class="field">
+                <label class="label">Product Name</label>
+                <div class="control">
+                    <input class="input" v-model="productModel.name" />
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label class="label">Product PartType</label>
+                    <input class="input" v-model="productModel.partType" />
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label class="label">Product Description</label>
+                    <input class="input" v-model="productModel.description" />
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label class="label">Product Price</label>
+                    <input class="input" v-model="productModel.price" />
+                </div>
+            </div>
+
+            <button class="button is-success" v-on:click="createProduct" v-if="!productModel.productId">Create Product</button>
+            <button class="button is-warning" v-on:click="updateProduct" v-else>Update Product</button>
+            <button class="button is-warning" v-on:click="cancel">Cancel</button>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/js/admin/products.js"></script>
+}

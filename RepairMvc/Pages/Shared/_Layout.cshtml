@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RepairMvc</title>
+    <!---->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/bulma/css/bulma.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <img src="/img/logo.jpg">
+            </div>
+
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" asp-page="/Index">Home</a>
+
+                    <a class="navbar-item" asp-page="/RepairOrders/Index">RepairOrders</a>
+                    <a class="navbar-item" asp-page="/Products/Index">Products</a>
+                    <a class="navbar-item" asp-page="/Orders/Index">Orders</a>
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            More
+                        </a>
+
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" asp-page="/Admin/Index">Admin</a>
+                            <a class="navbar-item" asp-page="/About/Index">About</a>
+                            <a class="navbar-item" asp-page="/Privacy">Privacy</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="column justify-content-center">
+            @RenderBody()
+        </main>
+
+    </div>
+
+    <div class="container has-text-centered">
+        &copy; 2021 - RepairMvc - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    </div>
+
+    <!---->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+  
+</html>
